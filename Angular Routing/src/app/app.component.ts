@@ -7,11 +7,11 @@ import {
   NavigationError,
   NavigationCancel,
 } from '@angular/router';
-import { AuthService } from './user/auth.service';
+import { AuthService } from './pages/user/auth.service';
 import { slideInAnimation } from './app.animation';
-import { MessageService } from './messages/message.service';
+import { MessageService } from './pages/messages/message.service';
 @Component({
-  selector: 'pm-root',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [slideInAnimation],
@@ -19,6 +19,11 @@ import { MessageService } from './messages/message.service';
 export class AppComponent {
   pageTitle = 'Acme Product Management';
   loading = true;
+
+  title = 'bpmn-js-angular';
+  diagramUrl =
+    'https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/dfceecba/starter/diagram.bpmn';
+  importError?: Error;
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
@@ -67,5 +72,18 @@ export class AppComponent {
     this.authService.logout();
     this.router.navigateByUrl('/welcome');
     console.log('Log out');
+  }
+  handleImported(event) {
+    const { type, error, warnings } = event;
+
+    if (type === 'success') {
+      console.log(`Rendered diagram (%s warnings)`, warnings.length);
+    }
+
+    if (type === 'error') {
+      console.error('Failed to render diagram', error);
+    }
+
+    this.importError = error;
   }
 }

@@ -1,5 +1,6 @@
 {
-  "files.autoSave": "afterDelay",
-  "html.format.wrapAttributes": "force-aligned",
-  "editor.wordWrapColumn": 300
+  // "files.autoSave": "afterDelay",
+  // "html.format.wrapAttributes": "force-aligned",
+  // "angular.enable-strict-mode-prompt": false,
+  // "editor.wordWrapColumn": 120
 }
