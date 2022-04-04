@@ -7,7 +7,7 @@ import {
 
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { TaskTypeObj, TaskTypeResolved } from '../model/TaskTypeObj';
+import { TaskTypeObj, TaskTypeResolved } from '../model/taskTypeObj';
 import { TaskTypesService } from './taskTypes.service';
 
 @Injectable({
@@ -20,15 +20,22 @@ export class TaskTypesResolverService implements Resolve<TaskTypeResolved> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<TaskTypeResolved> {
-    //const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
+    console.log('ID RESOLVED: ' + id);
 
     // if (isNaN(+id)) {
-    //   const message = `Product id was not a number: ${id}`;
+    //   const message = `Task id was not a number: ${id}`;
     //   console.error(message);
     //   return of({ taskType: null, error: message });
     // }
-    return this.taskTypeService
-      .getTaskTypesList()
-      .pipe(catchError((err) => of(err)));
+
+    return this.taskTypeService.getTaskById(id).pipe(
+      map((taskType) => ({ taskType })),
+      catchError((error) => {
+        const message = `Retrieval error: ${error}`;
+        console.error(message);
+        return of({ taskType: null, error: message });
+      })
+    );
   }
 }

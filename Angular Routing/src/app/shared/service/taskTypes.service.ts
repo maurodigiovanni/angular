@@ -1,18 +1,21 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { TaskType } from 'src/app/shared/model/TaskTypeObj';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { GetTaskTypesResponse } from '../model/response/getTaskTypesResponse';
-import { TaskTypeObj } from '../model/TaskTypeObj';
+import { TaskTypeObj } from '../model/taskTypeObj';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskTypesService {
-  // private apiGetUrl = 'http://dummy.restapiexample.com/api/v1/employees';
-
+  private taskTypeUrl = environment.baseUrl + 'getTaskTypes';
   constructor(private http: HttpClient) {}
 
   // getListUserObservable() {
@@ -22,14 +25,24 @@ export class TaskTypesService {
   //   );
   // }
 
-  public getTaskTypesList(id?: string): Observable<TaskTypeObj[]> {
-    //const params = new HttpParams().append('id', id);
+  public getTaskTypesList(): Observable<TaskTypeObj[]> {
     return this.http
-      .get<TaskTypeObj[]>(environment.baseUrl + 'getTaskTypes' /*,{params}*/)
+      .get<TaskTypeObj[]>(environment.baseUrl + 'getTaskTypes')
       .pipe(
         tap((data) => console.log('getTaskTypes ' + JSON.stringify(data))),
         catchError(this.handleError)
       );
+  }
+
+  getTaskById(id: string): Observable<TaskTypeObj> {
+    // if (id === 0) {
+    //   return of(this.initializeProduct());
+    // }
+    const url = `${this.taskTypeUrl}/${id}`;
+    return this.http.get<TaskTypeObj>(url).pipe(
+      tap((data) => console.log('getTaskType: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
   }
   private handleError(err: any): Observable<never> {
     // in a real world app, we may send the server to some remote logging infrastructure

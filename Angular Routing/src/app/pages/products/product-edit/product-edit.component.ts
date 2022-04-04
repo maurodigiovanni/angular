@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MessageService } from '../../messages/message.service';
-
-import { Product, ProductResolved } from '../product';
+import { Product, ProductResolved } from '@model/product';
 import { ProductService } from '../product.service';
 
 @Component({

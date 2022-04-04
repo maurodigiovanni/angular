@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { Product } from '../product';
+import { Product } from '@model/product';
 import { ignoreElements } from 'rxjs/operators';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 

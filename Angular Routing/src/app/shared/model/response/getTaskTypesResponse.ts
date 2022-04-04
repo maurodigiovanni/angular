@@ -1,4 +1,4 @@
-import { TaskTypeObj } from '../TaskTypeObj';
+import { TaskTypeObj } from '../taskTypeObj';
 
 export interface GetTaskTypesResponse {
   taskTypes?: TaskTypeObj[];

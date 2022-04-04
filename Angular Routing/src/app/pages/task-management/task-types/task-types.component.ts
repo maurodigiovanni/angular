@@ -1,33 +1,39 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { GetTaskTypesResponse } from 'src/app/shared/model/response/getTaskTypesResponse';
-import { TaskTypesService } from 'src/app/shared/service/taskTypes.service';
-import {
-  TaskTypeObj,
-  TaskTypeResolved,
-} from 'src/app/shared/model/TaskTypeObj';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TaskTypeObj, TaskTypeResolved } from '@model/TaskTypeObj';
+import { TaskTypesService } from 'src/app/shared/service/taskTypes.service';
+
 @Component({
   selector: 'pm-task-types',
   templateUrl: './task-types.component.html',
   styleUrls: ['./task-types.component.css'],
 })
 export class TaskTypesComponent implements OnInit {
+  displayMode: DisplayModeEnum = DisplayModeEnum.Card;
+  displayModeEnum = DisplayModeEnum;
   listTaskTypes: TaskTypeObj[];
   allTaskTypes: TaskTypeObj[];
+  errorMessage?: string;
+  task?: TaskTypeObj;
   sub: Subscription;
-  pageTitle: 'Task Types';
+  pageTitle = 'Task Types';
   page = 1;
   pageSize = 8;
   collectionSize = 0;
+  closeResult = '';
 
   constructor(
-    private service: TaskTypesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: TaskTypesService
   ) {}
 
   ngOnInit(): void {
-    this.getListTasksResolved();
+    this.displayMode = DisplayModeEnum.Card;
+    this.getListTasks();
+    // const id = +this.route.snapshot.paramMap.get('id');
+    // this.getProduct(id);
   }
 
   getListTasksResolved() {
@@ -79,4 +85,17 @@ export class TaskTypesComponent implements OnInit {
     this.listTaskTypes = list as any;
     //console.log(this.listTaskTypes);
   }
+  displayTaskDetails() {
+    // this.router.navigate([{ outlets: { popup: ['details'] } }]);
+    this.router.navigate([{ outlets: { popup: ['details'] } }]);
+  }
+  changeDisplayMode(mode: DisplayModeEnum) {
+    this.displayMode = mode;
+  }
+}
+
+enum DisplayModeEnum {
+  Card = 0,
+  Table = 1,
+  Map = 2,
 }

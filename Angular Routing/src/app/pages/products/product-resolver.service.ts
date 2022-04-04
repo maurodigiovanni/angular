@@ -8,7 +8,7 @@ import {
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { Product, ProductResolved } from './product';
+import { Product, ProductResolved } from '@model/product';
 import { ProductService } from './product.service';
 
 @Injectable({

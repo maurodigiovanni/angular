@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { ProductListComponent } from './product-list.component';
 import { ProductDetailComponent } from './product-detail.component';
@@ -13,32 +13,30 @@ import { ProductEditGuard } from './product-edit/product-edit.guard';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ProductData } from './product-data';
 
+const productRoutes: Routes = [
+  {
+    path: '',
+    component: ProductListComponent,
+  },
+  {
+    path: ':id',
+    component: ProductDetailComponent,
+    resolve: { resolvedData: ProductResolver },
+  },
+  {
+    path: ':id/edit',
+    component: ProductEditComponent,
+    canDeactivate: [ProductEditGuard],
+    resolve: { resolvedData: ProductResolver },
+    children: [
+      { path: '', redirectTo: 'info', pathMatch: 'full' },
+      { path: 'info', component: ProductEditInfoComponent },
+      { path: 'tags', component: ProductEditTagsComponent },
+    ],
+  },
+];
 @NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: ProductListComponent,
-      },
-      {
-        path: ':id',
-        component: ProductDetailComponent,
-        resolve: { resolvedData: ProductResolver },
-      },
-      {
-        path: ':id/edit',
-        component: ProductEditComponent,
-        canDeactivate: [ProductEditGuard],
-        resolve: { resolvedData: ProductResolver },
-        children: [
-          { path: '', redirectTo: 'info', pathMatch: 'full' },
-          { path: 'info', component: ProductEditInfoComponent },
-          { path: 'tags', component: ProductEditTagsComponent },
-        ],
-      },
-    ]),
-  ],
+  imports: [SharedModule, RouterModule.forChild(productRoutes)],
   declarations: [
     ProductListComponent,
     ProductDetailComponent,

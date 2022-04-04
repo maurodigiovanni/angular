@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Product } from '../product';
+import { Product } from '@model/product';
 
 @Component({
   templateUrl: './product-edit-tags.component.html',

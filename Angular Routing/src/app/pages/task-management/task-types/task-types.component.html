@@ -1,38 +1,34 @@
-
-<div class="card">
-  <div class="card-header">
-    {{pageTitle}}
-  </div>
-
-  <div class="card-body" *ngIf="listTaskTypes">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Category</th>
-          <th scope="col">Description</th>
-          <th scope="col">Subtype</th>
-          <th scope="col">Type</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let task of listTaskTypes;">
-          <th scope="row">--</th>
-          <td>{{ task.category }}</td>
-          <td>{{ task.description }}</td>
-          <td>{{ task.subtype }}</td>
-          <td>{{ task.type }}</td>
-
-
-        </tr>
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-between p-2">
-      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="refreshTasks()">
-      </ngb-pagination>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <button type="button" class="btn btn-link"
+            (click)="changeDisplayMode(displayModeEnum.Card)"
+            [class.active]="displayMode ===
+            displayModeEnum.Card">
+            <i class="bi bi-card-list"></i>
+            Card View
+          </button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-link"
+            (click)="changeDisplayMode(displayModeEnum.Table)"
+            [class.active]="displayMode ===
+            displayModeEnum.Table"><i class="bi bi-table"></i> List View
+          </button>
+        </li>
+      </ul>
     </div>
-
   </div>
-</div>
+</nav>
+
+<pm-task-type-table
+  [listTaskTypes]="listTaskTypes"
+  [hidden]="displayMode !== displayModeEnum.Table">
+</pm-task-type-table>
+
+<pm-task-type-card
+  [listTaskTypes]="listTaskTypes"
+  [hidden]="displayMode !== displayModeEnum.Card">
+</pm-task-type-card>
