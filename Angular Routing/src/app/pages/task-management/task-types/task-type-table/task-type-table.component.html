@@ -1,0 +1,37 @@
+
+<div class="card">
+  <div class="card-header">LIST</div>
+
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Category</th>
+          <th scope="col">Description</th>
+          <th scope="col">Subtype</th>
+          <th scope="col">Type</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of listTaskTypes;">
+          <th scope="row">
+            <a [routerLink]="['/task-types', task.id]">
+              {{ task.id }}
+            </a>
+
+          </th>
+          <td>{{ task.category }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.subtype }}</td>
+          <td>{{ task.type }}</td>
+
+
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+    </div>
+  </div>
+</div>

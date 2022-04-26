@@ -1,0 +1,42 @@
+<div class="card" *ngIf="task">
+  <div class="card-header">
+    DETAILS TASK : {{task.id}}
+  </div>
+
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-3">Description:</div>
+          <div class="col-md-6">{{task.description}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Type:</div>
+          <div class="col-md-6">{{task.type}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">SubType:</div>
+          <div class="col-md-6">{{task.subtype}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Category:</div>
+          <div class="col-md-6">{{task.category}}</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <button class="btn btn-outline-secondary mr-3"
+          style="width:80px"
+          [routerLink]="['/task-types']">
+          <i class="fa fa-chevron-left"></i> Back
+        </button>
+
+      </div>
+    </div>
+
+    <div class="alert alert-danger"
+      *ngIf="errorMessage">{{errorMessage}}
+    </div>

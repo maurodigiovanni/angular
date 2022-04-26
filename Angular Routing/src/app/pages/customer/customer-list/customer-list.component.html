@@ -1,0 +1,42 @@
+<div class='row'>
+  <div class='col-md-8'>
+
+    <div class="card">
+      <div class="card-header">Customer List</div>
+
+      <div class="card-body">
+
+        <table class='table table-responsive'>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Country</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let customer of customers;">
+              <td>{{customer.customerNo}}</td>
+              <td>{{customer.name}}</td>
+              <td>{{customer.address}}</td>
+              <td>{{customer.city}}</td>
+              <td>{{customer.state}}</td>
+              <td>{{customer.country}}</td>
+              <td><button (click)="showDetails(customer)">Edit</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+  <div class='col-md-4'>
+
+    <pm-customer-detail [customer]="selectedCustomer" (customerChange)="update($event)"></pm-customer-detail>
+
+  </div>
+</div>

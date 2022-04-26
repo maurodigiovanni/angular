@@ -4,15 +4,22 @@
   </div>
 
   <div class="card-body">
-    <div class="row">
+    <div class="row justify-content-between">
+      <!-- <div class="col-3">
+        <select class="form-control" *ngIf="vm$ | async as vm">
+          <option value="0">- Display All -</option>
+          <option *ngFor="let category of vm.categories"
+            [value]="category.id">{{ category.name }}</option>
+        </select>
+      </div> -->
       <div class="col-md-2">Filter by:</div>
       <div class="col-md-4">
         <input type="text"
-               [(ngModel)]="listFilter" />
+          [(ngModel)]="listFilter" />
       </div>
     </div>
     <div class="row"
-         *ngIf="listFilter">
+      *ngIf="listFilter">
       <div class="col-md-6">
         <h4>Filtered by: {{listFilter}}</h4>
       </div>
@@ -20,12 +27,12 @@
 
     <div class="table-responsive">
       <table class="table mb-0"
-             *ngIf="products && products.length">
+        *ngIf="products && products.length">
         <thead>
           <tr>
             <th>
               <button class="btn btn-outline-primary btn-sm"
-                      (click)="toggleImage()">
+                (click)="toggleImage()">
                 {{showImage ? "Hide" : "Show"}} Image
               </button>
             </th>
@@ -41,14 +48,14 @@
           <tr *ngFor="let product of filteredProducts">
             <td>
               <img *ngIf="showImage && product.imageUrl"
-                   [src]="product.imageUrl"
-                   [title]="product.productName"
-                   [style.width.px]="imageWidth"
-                   [style.margin.px]="imageMargin">
+                [src]="product.imageUrl"
+                [title]="product.productName"
+                [style.width.px]="imageWidth"
+                [style.margin.px]="imageMargin">
             </td>
             <td>
               <a [routerLink]="['/products', product.id]"
-                 [queryParams]="{filterBy: listFilter, showImage:showImage}">
+                [queryParams]="{filterBy: listFilter, showImage:showImage}">
                 {{ product.productName }}
               </a>
             </td>
@@ -74,6 +81,6 @@
 </div>
 
 <div *ngIf="errorMessage"
-     class="alert alert-danger">
+  class="alert alert-danger">
   Error: {{ errorMessage }}
 </div>

@@ -17,7 +17,7 @@ import { MessageService } from './pages/messages/message.service';
   animations: [slideInAnimation],
 })
 export class AppComponent {
-  pageTitle = 'Acme Product Management';
+  pageTitle = 'Acme';
   loading = true;
 
   title = 'bpmn-js-angular';

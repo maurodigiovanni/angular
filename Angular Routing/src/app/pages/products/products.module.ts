@@ -17,6 +17,7 @@ const productRoutes: Routes = [
   {
     path: '',
     component: ProductListComponent,
+    data: { title: 'Product List' },
   },
   {
     path: ':id',

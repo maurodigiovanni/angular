@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { catchError, tap, map, shareReplay } from 'rxjs/operators';
 import { Product } from '@model/product';
+import { ProductCategoryService } from '../product-categories/product-category.service';
+import { ProductCategory } from '../product-categories/product-category';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +18,8 @@ export class ProductService {
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.productsUrl).pipe(
-      tap((data) => console.log(JSON.stringify(data))),
+      shareReplay(1),
+      tap((products) => console.log(JSON.stringify(products))),
       catchError(this.handleError)
     );
   }
@@ -71,9 +74,9 @@ export class ProductService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
+      errorMessage = `Backend returned code ${err.status}: ${err.message}`;
     }
-    console.error(err);
+    console.error(errorMessage);
     return throwError(errorMessage);
   }
 

@@ -4,21 +4,28 @@
   </div>
   <div class="card-body">
     <div class="container-fluid">
-      <div class="text-center">
+      <!-- <div class="text-center">
         <img src="./assets/images/logo.jpg"
-             class="img-responsive center-block"
-             style="max-height:300px;padding-bottom:50px" />
-      </div>
+          class="img-responsive center-block"
+          style="max-height:300px;padding-bottom:50px" />
+      </div> -->
+      <!-- Photo List -->
+      <ul class="list-unstyled">
+        <li class="media mb-4" *ngFor="let photoId of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
 
-      <div class="text-center">Developed by:</div>
-      <div class="text-center">
-        <h3>Deborah Kurata</h3>
-      </div>
+          <!-- Image -->
+          <img class="mr-3" [src]="getImageUrl(photoId)">
 
-      <div class="text-center">@deborahkurata</div>
-      <div class="text-center">
-        <a href="http://www.bit.ly/DeborahKsBlog">www.bit.ly/DeborahKsBlog</a>
-      </div>
+          <!-- Photo title & description-->
+          <div class="media-body">
+            <h5 class="mt-0 mb-1">
+              <a [routerLink]="photoId">Photo {{photoId}}</a>
+            </h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+          </div>
+
+        </li>
+      </ul>
     </div>
   </div>
 </div>

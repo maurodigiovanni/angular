@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Imports for loading & configuring the in-memory web api
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { ProductData } from './pages/products/product-data';
+import { AppData } from './app-data';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,10 +17,14 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { UserModule } from './pages/user/user.module';
 import { MessageModule } from './pages/messages/message.module';
 import { CustomerComponent } from './pages/form-demo/customer.component';
+import { ModalContainerComponent } from './pages/home/modal-container.component';
+import { PhotoDetailComponent } from './pages/photo-detail/photo-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
+    ModalContainerComponent,
+    PhotoDetailComponent,
     PageNotFoundComponent,
     CustomerComponent,
   ],
@@ -30,7 +34,7 @@ import { CustomerComponent } from './pages/form-demo/customer.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(ProductData, {
+    HttpClientInMemoryWebApiModule.forRoot(AppData, {
       // rootPath: '/api/',
       passThruUnknownUrl: true,
       delay: 1000,

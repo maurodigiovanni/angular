@@ -9,6 +9,7 @@ import { CustomerComponent } from './pages/form-demo/customer.component';
 import { DiagramComponent } from './pages/bpmn-camunda/diagram/diagram.component';
 import { BpmnCamundaModule } from './pages/bpmn-camunda/bpmn-camunda.module';
 import { BpmnComponent } from './pages/bpmn-camunda/bpmn/bpmn.component';
+import { ModalContainerComponent } from './pages/home/modal-container.component';
 
 @NgModule({
   // imports: [RouterModule.forRoot(ROUTES, { enableTracing: true })],
@@ -16,6 +17,7 @@ import { BpmnComponent } from './pages/bpmn-camunda/bpmn/bpmn.component';
     RouterModule.forRoot(
       [
         { path: 'welcome', component: WelcomeComponent },
+        { path: 'welcome/:id', component: ModalContainerComponent },
         {
           path: 'products',
           canActivate: [AuthGuard],
@@ -27,16 +29,16 @@ import { BpmnComponent } from './pages/bpmn-camunda/bpmn/bpmn.component';
             ),
         },
         { path: 'demo-form', component: CustomerComponent },
-        // {
-        //   path: 'bpmn',
-        //   //canActivate: [AuthGuard],
-        //   //https://app.pluralsight.com/course-player?clipId=40eb0ee9-4330-4e98-af47-c429fd760174
-        //   //data: { preload: true },
-        //   loadChildren: () =>
-        //     import('./bpmn-camunda/bpmn-camunda.module').then(
-        //       (m) => m.BpmnCamundaModule
-        //     ),
-        // },
+        {
+          path: 'customers',
+
+          //https://app.pluralsight.com/course-player?clipId=40eb0ee9-4330-4e98-af47-c429fd760174
+          data: { preload: false },
+          loadChildren: () =>
+            import('./pages/customer/customer.modules').then(
+              (m) => m.CustomersModule
+            ),
+        },
         { path: 'bpmn', component: BpmnComponent },
         {
           path: 'task-types',
